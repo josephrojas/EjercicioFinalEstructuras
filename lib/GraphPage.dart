@@ -13,13 +13,13 @@ class GraphPage extends StatelessWidget {
             Container(
               padding: new EdgeInsets.only(
                   top: 10.0, bottom: 10.0, left: 15.0, right: 15.0),
-              color: Colors.green,
+
               margin: EdgeInsets.all(15.0),
               child: Text(
                 "El camino mas corto",
                 style: TextStyle(
                     fontSize: 40.0,
-                    color: Colors.white,
+                    color: Colors.black,
                     decoration: TextDecoration.none),
                 textAlign: TextAlign.center,
               ),
@@ -28,7 +28,7 @@ class GraphPage extends StatelessWidget {
               Container(
                   padding: new EdgeInsets.only(top: 20.0),
                   margin: EdgeInsets.all(15.0),
-                  color: Colors.green,
+
                   width: MediaQuery.of(context).size.width / 2 - 48,
                   height: 500,
                   child: CustomPaint(
@@ -40,13 +40,12 @@ class GraphPage extends StatelessWidget {
                       top: 10.0, bottom: 10.0, left: 5.0, right: 5.0),
                   width: MediaQuery.of(context).size.width / 2,
                   height: 500,
-                  color: Colors.green,
                   margin: EdgeInsets.only(right: 5),
                   alignment: Alignment.topRight,
                   child: Text(
                     "El camino mas corto entre ciudad a y ciudad b es este",
                     style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.black,
                         decoration: TextDecoration.none,
                         fontSize: 30.0),
                     textAlign: TextAlign.center,
@@ -59,6 +58,14 @@ class GraphPage extends StatelessWidget {
               margin: EdgeInsets.only(left:15.0, right: 15.0, top:5.0),
               width: MediaQuery.of(context).size.width ,
               height: 170,
+              child: Text(
+              "Inserte boton aqui.",
+              style: TextStyle(
+                  color: Colors.black,
+                  decoration: TextDecoration.none,
+                  fontSize: 30.0),
+              textAlign: TextAlign.center,
+            )
             )],
         ),
       ),
@@ -75,9 +82,6 @@ class Node extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = 4.0
       ..color = Colors.black;
-    final fill = Paint()
-      ..style = PaintingStyle.fill
-      ..color = Colors.white;
     var r = 25.0;
     var limit = 5;
     var rightMargen = 50.0;
@@ -89,7 +93,7 @@ class Node extends CustomPainter {
       canvas.drawOval(
           Rect.fromLTWH((rightMargen + 10), ((topMargen * i) + 10),
               (r - 10) * 2, (r - 10) * 2),
-          fill);
+          paint);
       canvas.drawLine(
           Offset(rightMargen + r, (topMargen * i + (2 * r))),
           Offset(
