@@ -1,68 +1,81 @@
-
 import 'package:flutter/material.dart';
+
+import 'city_description.dart';
 
 class Principal extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-        backgroundColor: Colors.white,
-        body: SafeArea(
-          child: Center(
-            child: Column(
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    FlatButton(
-                      padding: EdgeInsets.all(0),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: Icon(Icons.chevron_left, size: 100.0),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  FlatButton(
+                    padding: EdgeInsets.all(0),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Icon(Icons.chevron_left, size: 100.0),
+                  ),
+                  Center(
+                    child: Column(
+                      children: [
+                        Image(
+                          width: 183,
+                          height: 145,
+                          image: AssetImage('assets/img/logo.png'),
+                        ),
+                        Text(
+                          "¿Para dónde vamos?",
+                          style: TextStyle(fontSize: 20),
+                        )
+                      ],
                     ),
-                    Center(
-                      child: Image(
-                        width: 200.0,
-                        height: 200.0,
-                        image: AssetImage('Images/Captura.PNG'),
-                      ),
-                    ),
-                  ],
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    DropDownStates(),
-                    Image(
-                      image: NetworkImage(
-                          'https://www.gettyimages.es/gi-resources/images/500px/983794168.jpg'),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 120.0),
-                      child: DropDownStates(),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    FlatButton(
-                      padding: EdgeInsets.all(0),
-                      onPressed: () {
-                        print('ama toy triunfando en derecho xd');
-                      },
-                      child: Icon(Icons.chevron_right, size: 100.0),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  DropDownStates(),
+                  Image(
+                    image: NetworkImage(
+                        'https://www.gettyimages.es/gi-resources/images/500px/983794168.jpg'),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 120.0),
+                    child: DropDownStates(),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  FlatButton(
+                    padding: EdgeInsets.all(0),
+                   onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => CityDescription()),
+                      );
+                    },
+                    child: Icon(Icons.chevron_right, size: 100.0),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
-      );
-    
-    
+      ),
+    );
   }
 }
 

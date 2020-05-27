@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'GraphPage.dart';
-void main() => runApp(GraphsMain());
 
 class GraphsMain extends StatelessWidget{
   @override

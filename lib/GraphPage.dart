@@ -4,70 +4,78 @@ import 'package:flutter/material.dart';
 class GraphPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        alignment: Alignment.center,
-        color: Colors.white,
-        child: Column(
-          children: <Widget>[
-            Container(
-              padding: new EdgeInsets.only(
-                  top: 10.0, bottom: 10.0, left: 15.0, right: 15.0),
-
-              margin: EdgeInsets.all(15.0),
-              child: Text(
-                "El camino mas corto",
-                style: TextStyle(
-                    fontSize: 40.0,
-                    color: Colors.black,
-                    decoration: TextDecoration.none),
-                textAlign: TextAlign.center,
+    return Container(
+      alignment: Alignment.center,
+      color: Colors.white,
+      child: Column(
+        children: <Widget>[
+          SizedBox(
+            height: 20,
+          ),
+          Row(
+            children: [
+              Container(
+                child: Image(
+                  image: AssetImage("assets/img/volver.png"),
+                  width: 69,
+                  height: 69  ,
+                ),
               ),
-            ),
-            Row(children: <Widget>[
-              Container(
-                  padding: new EdgeInsets.only(top: 20.0),
-                  margin: EdgeInsets.all(15.0),
-
-                  width: MediaQuery.of(context).size.width / 2 - 48,
-                  height: 500,
-                  child: CustomPaint(
-                    size: Size(70, 100),
-                    painter: Node(),
-                  )),
-              Container(
-                  padding: new EdgeInsets.only(
-                      top: 10.0, bottom: 10.0, left: 5.0, right: 5.0),
-                  width: MediaQuery.of(context).size.width / 2,
-                  height: 500,
-                  margin: EdgeInsets.only(right: 5),
-                  alignment: Alignment.topRight,
-                  child: Text(
-                    "El camino mas corto entre ciudad a y ciudad b es este",
+              SizedBox(
+                width: 20,
+              ),
+              Column(
+                children: [
+                  Container(
+                    child: Image(
+                      image: AssetImage("assets/img/logo.png"),
+                      width: 183,
+                      height: 145,
+                    ),
+                  ),
+                  Text(
+                    "El camino más corto a tu ruta",
                     style: TextStyle(
-                        color: Colors.black,
-                        decoration: TextDecoration.none,
-                        fontSize: 30.0),
-                    textAlign: TextAlign.center,
-                  ))
-            ]),
-            Container(
-              padding: new EdgeInsets.only(
-                  top: 50.0, bottom: 10.0, left: 15.0, right: 15.0),
-              color: Colors.green,
-              margin: EdgeInsets.only(left:15.0, right: 15.0, top:5.0),
-              width: MediaQuery.of(context).size.width ,
-              height: 170,
-              child: Text(
-              "Inserte boton aqui.",
-              style: TextStyle(
-                  color: Colors.black,
-                  decoration: TextDecoration.none,
-                  fontSize: 30.0),
-              textAlign: TextAlign.center,
-            )
-            )],
-        ),
+                      fontSize: 14,
+                      color: Colors.black,
+                      decoration: TextDecoration.none
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
+          Row(
+            children: <Widget>[
+              Container(
+                padding: new EdgeInsets.only(top: 20.0),
+                margin: EdgeInsets.all(15.0),
+                width: MediaQuery.of(context).size.width / 2 - 48,
+                height: 500,
+                child: CustomPaint(
+                  size: Size(70, 100),
+                  painter: Node(),
+                ),
+              ),
+              Container(
+                padding: new EdgeInsets.only(
+                    top: 10.0, bottom: 10.0, left: 5.0, right: 5.0),
+                width: MediaQuery.of(context).size.width / 2,
+                height: 500,
+                margin: EdgeInsets.only(right: 5),
+                alignment: Alignment.topRight,
+                child: Text(
+                  "El camino mas corto entre ciudad a y ciudad b es este",
+                  style: TextStyle(
+                      color: Colors.black,
+                      decoration: TextDecoration.none,
+                      fontSize: 30.0),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -86,7 +94,7 @@ class Node extends CustomPainter {
     var limit = 5;
     var rightMargen = 50.0;
     var topMargen = 70.0;
-    var text="Hola";
+    var text = "Hola";
     for (double i = 0; i < limit; i++) {
       canvas.drawOval(
           Rect.fromLTWH(rightMargen, (topMargen * i), r * 2, r * 2), paint);
