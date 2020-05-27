@@ -19,7 +19,7 @@ class GraphPage extends StatelessWidget {
                 "El camino mas corto",
                 style: TextStyle(
                     fontSize: 40.0,
-                    color: Colors.black,
+                    color: Colors.white,
                     decoration: TextDecoration.none),
                 textAlign: TextAlign.center,
               ),
@@ -46,7 +46,7 @@ class GraphPage extends StatelessWidget {
                   child: Text(
                     "El camino mas corto entre ciudad a y ciudad b es este",
                     style: TextStyle(
-                        color: Colors.black,
+                        color: Colors.white,
                         decoration: TextDecoration.none,
                         fontSize: 30.0),
                     textAlign: TextAlign.center,
@@ -101,7 +101,7 @@ class Node extends CustomPainter {
     canvas.drawOval(
         Rect.fromLTWH((rightMargen + 10), ((topMargen * limit) + 10),
             (r - 10) * 2, (r - 10) * 2),
-        fill);
+        paint);
   }
 
   @override
