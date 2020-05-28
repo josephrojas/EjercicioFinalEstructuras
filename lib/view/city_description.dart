@@ -1,3 +1,4 @@
+import 'package:final_proyect_data_strucures/view/fade_out.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'GraphPage.dart';
@@ -14,9 +15,11 @@ class _CityDescriptionState extends State<CityDescription> {
       body: Stack(children: [
         Positioned(
           left: 90,
-          child: InkWell(
-            child: Image(
-              image: AssetImage("assets/img/pointers.png")
+          child: FadeOut(
+            3,InkWell(
+              child: Image(
+                image: AssetImage("assets/img/pointers.png")
+              ),
             ),
           ),
         ),
@@ -28,6 +31,7 @@ class _CityDescriptionState extends State<CityDescription> {
                 height: 40,
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   InkWell(
                     onTap: ()
@@ -36,12 +40,9 @@ class _CityDescriptionState extends State<CityDescription> {
                     },
                     child: Image(
                       image: AssetImage("assets/img/volver.png"),
-                      width: 69,
-                      height: 69,
+                      width: 40,
+                      height: 40,
                     ),
-                  ),
-                  SizedBox(
-                    width: 40,
                   ),
                   InkWell(
                     child: Image(

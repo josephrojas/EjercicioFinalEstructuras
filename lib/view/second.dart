@@ -13,14 +13,17 @@ class Principal extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  FlatButton(
-                    padding: EdgeInsets.all(0),
-                    onPressed: () {
+                  InkWell(
+                    onTap: () {
                       Navigator.pop(context);
                     },
-                    child: Icon(Icons.chevron_left, size: 100.0),
+                    child: Image(
+                      image: AssetImage("assets/img/volver.png"),
+                      width: 40,
+                      height: 40,
+                    ),
                   ),
                   Center(
                     child: Column(
@@ -61,10 +64,11 @@ class Principal extends StatelessWidget {
                 children: <Widget>[
                   FlatButton(
                     padding: EdgeInsets.all(0),
-                   onPressed: () {
+                    onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => CityDescription()),
+                        MaterialPageRoute(
+                            builder: (context) => CityDescription()),
                       );
                     },
                     child: Icon(Icons.chevron_right, size: 100.0),
