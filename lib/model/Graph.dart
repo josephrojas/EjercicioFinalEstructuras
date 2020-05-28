@@ -6,7 +6,7 @@ class Graph {
 
   }
 
-  dijkistra(int start) {
+  /*dijkistra(int start) {
     List<int> distance;
     List<int> padre;
     List<bool> visto;
@@ -34,5 +34,5 @@ class Graph {
       }
     }
     return distance;
-  }
+  }*/
 }
