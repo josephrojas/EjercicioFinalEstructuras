@@ -134,11 +134,12 @@ class Cities {
       Cities(1, "Oviedo"),
       Cities(2, "Bilbao"),
       Cities(3, "Madrid"),
+      Cities(8, "Sevilla"),
       Cities(4, "Alicante"),
       Cities(5, "Barcelona"),
       Cities(6, "Malaga"),
       Cities(7, "Melilla"),
-      Cities(8, "Sevilla"),
+      
     ];
   }
 }
