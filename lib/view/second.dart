@@ -165,9 +165,9 @@ class _PrincipalState extends State<Principal> {
                     onPressed: () {
                       setState(() {
                         Graph graph = new Graph();
-                        List<int> citiesId =
-                        graph.dijkistra(_originCity, _destCity);
-                        print(citiesId.toString());
+                        List<int> citiesId = graph.dijkistra(_originCity, _destCity);
+                        print(_originCity);
+                        print(_destCity);
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -199,11 +199,11 @@ class Cities {
       Cities(1, "Oviedo"),
       Cities(2, "Bilbao"),
       Cities(3, "Madrid"),
-      Cities(8, "Sevilla"),
-      Cities(4, "Alicante"),
-      Cities(5, "Barcelona"),
-      Cities(6, "Malaga"),
-      Cities(7, "Melilla"),
+      Cities(4, "Sevilla"),
+      Cities(5, "Alicante"),
+      Cities(6, "Barcelona"),
+      Cities(7, "Malaga"),
+      Cities(8, "Melilla"),
     ];
   }
 }

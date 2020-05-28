@@ -20,6 +20,7 @@ class _CityDescriptionState extends State<CityDescription>
   String _cityDescription = "";
   String _pathImage = "";
   String _cityValue = "";
+  List <String> citiesName=new List<String>();
 
   @override
   void initState() {
@@ -37,12 +38,13 @@ class _CityDescriptionState extends State<CityDescription>
 
   void getValue() {
     setState(() {
-      switch (widget.cityId[_actualPosition+1]) {
+      switch (widget.cityId[_actualPosition]) {
         case 3: //Madrid City
           _cityDescription =
               "Madrid, Spain's central capital, is a city of elegant boulevards and expansive, manicured parks such as the Buen Retiro. It’s renowned for its rich repositories of European art, including the Prado Museum’s works by Goya, Velázquez and other Spanish masters";
           _cityValue = "100";
           _cityName = "Madrid";
+          this.citiesName.add(_cityName);
           _pathImage = "assets/img/madrid.jpg";
           break;
         case 1: //Oviedo city
@@ -51,6 +53,7 @@ class _CityDescriptionState extends State<CityDescription>
               "The Archaeological Museum of Asturias, in a nearby convent, displays regional artifacts. The Fine Arts Museum of Asturias includes 2 palaces and has an expansive Spanish art collection.";
           _cityValue = "100";
           _cityName = "Oviedo";
+          this.citiesName.add(_cityName);
           _pathImage = "assets/img/oviedo.jpg";
           break;
         case 2: //Bilbao City
@@ -59,6 +62,7 @@ class _CityDescriptionState extends State<CityDescription>
               "It’s famed for the Frank Gehry–designed Guggenheim Museum Bilbao, which sparked revitalization when it opened in 1997. The museum houses prominent modern and contemporary works, but it’s the curvy, titanium-clad building that receives the most attention.";
           _cityValue = "50";
           _cityName = "Bilbao";
+          this.citiesName.add(_cityName);
           _pathImage = "assets/img/bilbao.jpg";
           break;
         case 4: //Sevilla city
@@ -67,6 +71,7 @@ class _CityDescriptionState extends State<CityDescription>
               "The Gothic Seville Cathedral is the site of Christopher Columbus’s tomb and a minaret turned bell tower, the Giralda.";
           _cityValue = "20";
           _cityName = "Sevilla";
+          this.citiesName.add(_cityName);
           _pathImage = "assets/img/sevilla.jpg";
           break;
         case 5: //Alicante city
@@ -75,6 +80,7 @@ class _CityDescriptionState extends State<CityDescription>
               " From here, an elevator or a steep climb leads to medieval Castillo de Santa Bárbara, set on a hilltop with sweeping views of the Mediterranean coast.";
           _cityValue = "120";
           _cityName = "Alicante";
+          this.citiesName.add(_cityName);
           _pathImage = "assets/img/alicante.jpg";
           break;
         case 6: //Barcelona city
@@ -83,6 +89,7 @@ class _CityDescriptionState extends State<CityDescription>
               "Museu Picasso and Fundació Joan Miró feature modern art by their namesakes. City history museum MUHBA, includes several Roman archaeological sites.";
           _cityValue = "160";
           _cityName = "Barcelona";
+          this.citiesName.add(_cityName);
           _pathImage = "assets/img/barcelona.jpg";
           break;
         case 7: //Malaga city
@@ -91,6 +98,7 @@ class _CityDescriptionState extends State<CityDescription>
               "The city's soaring Renaissance cathedral is nicknamed La Manquita (\"one-armed lady\") because one of its towers was curiously left unbuilt.";
           _cityValue = "100";
           _cityName = "Malaga";
+          this.citiesName.add(_cityName);
           _pathImage = "assets/img/malaga.jpg";
           break;
         case 8: //Melilla City
@@ -99,6 +107,7 @@ class _CityDescriptionState extends State<CityDescription>
               "It has an area of 12.3 km². Melilla is one of two permanently inhabited Spanish cities in mainland Africa, the other being nearby Ceuta.";
           _cityValue = "220";
           _cityName = "Melilla";
+          this.citiesName.add(_cityName);
           _pathImage = "assets/img/melilla.jpg";
           break;
 
@@ -130,7 +139,7 @@ class _CityDescriptionState extends State<CityDescription>
                       setState(() {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => GraphPage()),
+                          MaterialPageRoute(builder: (context) => GraphPage(citiesName: this.citiesName,)),
                         );
                       });
                     });
@@ -236,7 +245,10 @@ class _CityDescriptionState extends State<CityDescription>
                     rotationController.forward(from: 0.0);
                     Future.delayed(const Duration(milliseconds: 500), () {
                       setState(() {
-                        _actualPosition++;
+                        if(_actualPosition+1<widget.cityId.length)
+                          {
+                            _actualPosition++;
+                          }
                         getValue();
                       });
                     });

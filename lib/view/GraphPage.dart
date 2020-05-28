@@ -3,13 +3,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class GraphPage extends StatefulWidget {
+  final List<String> citiesName;
+  GraphPage({Key key, @required this.citiesName});
   @override
   _GraphPageState createState() => _GraphPageState();
 }
 
 class _GraphPageState extends State<GraphPage> with TickerProviderStateMixin {
-
-
   AnimationController rotationController;
 
   @override
@@ -25,6 +25,19 @@ class _GraphPageState extends State<GraphPage> with TickerProviderStateMixin {
     super.dispose();
   }
 
+  Widget getTextWidgets(List<String> strings) {
+    List<Widget> list = new List<Widget>();
+    for (var i = 0; i < strings.length; i++) {
+      list.add(new SizedBox(
+        height: 25,
+      ));
+      list.add(new Text(strings[i]));
+      list.add(new SizedBox(
+        height: 25,
+      ));
+    }
+    return new Column(children: list);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +82,8 @@ class _GraphPageState extends State<GraphPage> with TickerProviderStateMixin {
                 ),
               ),
               FadeOut(
-                3.5,Text(
+                3.5,
+                Text(
                   "El camino más corto a tu ruta\n es el siguiente",
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -80,16 +94,25 @@ class _GraphPageState extends State<GraphPage> with TickerProviderStateMixin {
               ),
               FadeOut(
                 4.5,
-                Container(
-                  height: 500,
-                  alignment: Alignment.centerLeft,
-                  child: Transform.rotate(
-                    angle: 200,
-                    child: CustomPaint(
-                      size: Size(70, 100),
-                      painter: Node(),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      height: 500,
+                      alignment: Alignment.topCenter,
+                      child: CustomPaint(
+                        size: Size(70, 100),
+                        painter: Node(widget.citiesName),
+                      ),
                     ),
-                  ),
+                    SizedBox(
+                      width: 40,
+                    ),
+                    Container(
+                      alignment: Alignment.topCenter,
+                      child: getTextWidgets(widget.citiesName),
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -104,6 +127,10 @@ class Node extends CustomPainter {
   @override
   List<int> _caminos;
 
+  List<String> citiesName;
+  Node(List<String> citiesName) {
+    this.citiesName = citiesName;
+  }
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
       ..style = PaintingStyle.stroke
@@ -114,25 +141,21 @@ class Node extends CustomPainter {
     var rightMargen = 50.0;
     var topMargen = 70.0;
     var text = "Hola";
-    for (double i = 0; i < limit; i++) {
+    for (double i = 0; i < this.citiesName.length; i++) {
       canvas.drawOval(
           Rect.fromLTWH(rightMargen, (topMargen * i), r * 2, r * 2), paint);
       canvas.drawOval(
           Rect.fromLTWH((rightMargen + 10), ((topMargen * i) + 10),
               (r - 10) * 2, (r - 10) * 2),
           paint);
-      canvas.drawLine(
-          Offset(rightMargen + r, (topMargen * i + (2 * r))),
-          Offset(
-              rightMargen + r, (topMargen - r * 2) + (topMargen * i + (2 * r))),
-          paint);
+      if (i < this.citiesName.length - 1) {
+        canvas.drawLine(
+            Offset(rightMargen + r, (topMargen * i + (2 * r))),
+            Offset(rightMargen + r,
+                (topMargen - r * 2) + (topMargen * i + (2 * r))),
+            paint);
+      }
     }
-    canvas.drawOval(
-        Rect.fromLTWH(rightMargen, (topMargen * limit), r * 2, r * 2), paint);
-    canvas.drawOval(
-        Rect.fromLTWH((rightMargen + 10), ((topMargen * limit) + 10),
-            (r - 10) * 2, (r - 10) * 2),
-        paint);
   }
 
   @override
