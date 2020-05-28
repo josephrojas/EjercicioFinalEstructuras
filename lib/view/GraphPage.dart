@@ -47,6 +47,8 @@ class _GraphPageState extends State<GraphPage> with TickerProviderStateMixin {
           alignment: Alignment.center,
           color: Colors.white,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               SizedBox(
                 height: 20,
@@ -92,10 +94,14 @@ class _GraphPageState extends State<GraphPage> with TickerProviderStateMixin {
                       decoration: TextDecoration.none),
                 ),
               ),
+              SizedBox(
+                height: 30,
+              ),
               FadeOut(
                 4.5,
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
                       height: 500,
