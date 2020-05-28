@@ -123,7 +123,7 @@ class _PrincipalState extends State<Principal> {
                         image: DecorationImage(
                             fit: BoxFit.cover,
                             image: NetworkImage(
-                                'https://www.gettyimages.es/gi-resources/images/500px/983794168.jpg')),
+                                'https://estaticos.elperiodico.com/resources/jpg/5/4/9iik4drw-1550597960945.jpg')),
                         borderRadius: BorderRadius.all(Radius.circular(20)),
                         border: Border.all(
                           color: Colors.black,
@@ -166,8 +166,7 @@ class _PrincipalState extends State<Principal> {
                       setState(() {
                         Graph graph = new Graph();
                         List<int> citiesId = graph.dijkistra(_originCity, _destCity);
-                        print(_originCity);
-                        print(_destCity);
+                        print(citiesId.toString());
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -199,11 +198,11 @@ class Cities {
       Cities(1, "Oviedo"),
       Cities(2, "Bilbao"),
       Cities(3, "Madrid"),
-      Cities(4, "Sevilla"),
-      Cities(5, "Alicante"),
-      Cities(6, "Barcelona"),
-      Cities(7, "Malaga"),
-      Cities(8, "Melilla"),
+      Cities(8, "Sevilla"),
+      Cities(4, "Alicante"),
+      Cities(5, "Barcelona"),
+      Cities(6, "Malaga"),
+      Cities(7, "Melilla"),
     ];
   }
 }
