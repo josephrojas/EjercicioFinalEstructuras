@@ -1,18 +1,30 @@
 class Graph {
-  int maxVertices = 8;
+  int maxVertices;
   List<List<int>> adjacentMatrix;
   List<List<int>> weightMatrix;
-  List<List<int>> cities;
-  Graph() {}
+  List<int> distance;
+  List<int> padre;
+  List<bool> visto;
+  //List<Cities> cities;
+  Graph() {
+    maxVertices = 8;
+    adjacentMatrix = new List<List<int>>(8);
+    weightMatrix = new List<List<int>>(8);
+    distance = [];
+    padre = [];
+    visto = [];
+    //cities = Cities.getCities();
+    fillMatrix();
+  }
   //Lista de convenciones
-  // A = Oviedo
-  // B = Bilbao
-  // C = Madrid
-  // D = Sevilla
-  // E = Alicante
-  // F = Barcelona
-  // G = Malaga
-  // H = Melilla
+  // A = Oviedo = 1
+  // B = Bilbao = 2
+  // C = Madrid = 3
+  // D = Sevilla = 4
+  // E = Alicante = 5
+  // F = Barcelona = 6
+  // G = Malaga = 7
+  // H = Melilla = 8
 
   //Matriz de adyacencia
   //  A  B  C  D  E  F  G  H
@@ -37,6 +49,22 @@ class Graph {
   //H[0][0][0][0][0][0][221][0]
 
   void fillMatrix() {
+    for (var i = 0; i < maxVertices; i++) {
+      List<int> list = new List<int>(maxVertices);
+
+      for (var j = 0; j < maxVertices; j++) {
+        list[j] = 0;
+      }
+
+      adjacentMatrix[i] = list;
+      weightMatrix[i] = list;
+    }
+    for (int i = 0; i < maxVertices; i++) {
+      distance.add(120000);
+      padre.add(-1);
+      visto.add(false);
+    }
+
     adjacentMatrix[0][2] = 1;
     adjacentMatrix[1][2] = 1;
     adjacentMatrix[1][5] = 1;
@@ -60,57 +88,52 @@ class Graph {
     adjacentMatrix[6][7] = 1;
     adjacentMatrix[7][6] = 1;
 
-    adjacentMatrix[0][2] = 445;
-    adjacentMatrix[1][2] = 395;
-    adjacentMatrix[1][5] = 606;
-    adjacentMatrix[2][0] = 445;
-    adjacentMatrix[2][1] = 395;
-    adjacentMatrix[2][3] = 531;
-    adjacentMatrix[2][4] = 437;
-    adjacentMatrix[2][5] = 622;
-    adjacentMatrix[2][6] = 534;
-    adjacentMatrix[3][2] = 531;
-    adjacentMatrix[3][6] = 207;
-    adjacentMatrix[4][2] = 437;
-    adjacentMatrix[4][5] = 538;
-    adjacentMatrix[5][1] = 606;
-    adjacentMatrix[5][2] = 622;
-    adjacentMatrix[5][4] = 538;
-    adjacentMatrix[5][6] = 1006;
-    adjacentMatrix[6][2] = 534;
-    adjacentMatrix[6][3] = 207;
-    adjacentMatrix[6][5] = 1006;
-    adjacentMatrix[6][7] = 221;
-    adjacentMatrix[7][6] = 221;
+    weightMatrix[0][2] = 445;
+    weightMatrix[1][2] = 395;
+    weightMatrix[1][5] = 606;
+    weightMatrix[2][0] = 445;
+    weightMatrix[2][1] = 395;
+    weightMatrix[2][3] = 531;
+    weightMatrix[2][4] = 437;
+    weightMatrix[2][5] = 622;
+    weightMatrix[2][6] = 534;
+    weightMatrix[3][2] = 531;
+    weightMatrix[3][6] = 207;
+    weightMatrix[4][2] = 437;
+    weightMatrix[4][5] = 538;
+    weightMatrix[5][1] = 606;
+    weightMatrix[5][2] = 622;
+    weightMatrix[5][4] = 538;
+    weightMatrix[5][6] = 1006;
+    weightMatrix[6][2] = 534;
+    weightMatrix[6][3] = 207;
+    weightMatrix[6][5] = 1006;
+    weightMatrix[6][7] = 221;
+    weightMatrix[7][6] = 221;
+    print(weightMatrix[7][6]);
   }
 
   dijkistra(int start) {
-    List<int> distance = new List(maxVertices);
-    List<int> padre = new List(maxVertices);
-    List<bool> visto;
-    for (int i = 0; i < maxVertices; i++) {
-      distance[i] = 1200000000;
-      padre[i] = -1;
-      visto[i] = false;
-    }
-    distance[start] = 0;
-    List<int> pila;
-    pila.add(distance[start]);
+    distance[start - 1] = 0;
+    List<int> pila = [];
+    pila.add(start - 1);
     while (pila.length != 0) {
       int u = pila[0];
-      pila.remove(0);
+      pila.removeAt(0);
       visto[u] = true;
       for (int i = 0; i < maxVertices; i++) {
-        if (adjacentMatrix[u][i] != 0) {
-          if (distance[i] > distance[u] + adjacentMatrix[u][i]) {
-            distance[i] = distance[u] + adjacentMatrix[u][i];
-            padre[i] = u;
-            pila.add(i);
-            pila.sort();
+        if (weightMatrix[u][i] != 0) {
+          if (distance[u] + weightMatrix[u][i] < distance[i]) {
+            if (!visto[i]) {
+              distance[i] = distance[u] + weightMatrix[u][i];
+              padre[i] = u;
+              pila.add(i);
+              pila.sort();
+            }
           }
         }
       }
     }
-    return distance;
+    print(padre);
   }
 }
