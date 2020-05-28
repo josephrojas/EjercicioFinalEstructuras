@@ -3,15 +3,13 @@ class Graph {
   List<List<int>> adjacentMatrix;
   List<List<int>> weightMatrix;
   List<int> distance;
-  List<int> padre;
   List<bool> visto;
   //List<Cities> cities;
   Graph() {
     maxVertices = 8;
-    adjacentMatrix = new List<List<int>>(8);
-    weightMatrix = new List<List<int>>(8);
+    adjacentMatrix = new List<List<int>>(maxVertices);
+    weightMatrix = new List<List<int>>(maxVertices);
     distance = [];
-    padre = [];
     visto = [];
     //cities = Cities.getCities();
     fillMatrix();
@@ -60,34 +58,28 @@ class Graph {
       weightMatrix[i] = list;
     }
     for (int i = 0; i < maxVertices; i++) {
-      distance.add(120000);
-      padre.add(-1);
+      distance.add(120000000);
       visto.add(false);
     }
-
-    adjacentMatrix[0][2] = 1;
-    adjacentMatrix[1][2] = 1;
-    adjacentMatrix[1][5] = 1;
-    adjacentMatrix[2][0] = 1;
-    adjacentMatrix[2][1] = 1;
-    adjacentMatrix[2][3] = 1;
-    adjacentMatrix[2][4] = 1;
-    adjacentMatrix[2][5] = 1;
-    adjacentMatrix[2][6] = 1;
-    adjacentMatrix[3][2] = 1;
-    adjacentMatrix[3][6] = 1;
-    adjacentMatrix[4][2] = 1;
-    adjacentMatrix[4][5] = 1;
-    adjacentMatrix[5][1] = 1;
-    adjacentMatrix[5][2] = 1;
-    adjacentMatrix[5][4] = 1;
-    adjacentMatrix[5][6] = 1;
-    adjacentMatrix[6][2] = 1;
-    adjacentMatrix[6][3] = 1;
-    adjacentMatrix[6][5] = 1;
-    adjacentMatrix[6][7] = 1;
-    adjacentMatrix[7][6] = 1;
-
+    //A = 0;
+    //B = 1;
+    //C = 2;
+    //D = 3;
+    //E = 4;
+    //weightMatrix[0][1] = 3;
+    //weightMatrix[1][0] = 3;
+    //weightMatrix[0][2] = 1;
+    //weightMatrix[2][0] = 1;
+    //weightMatrix[2][1] = 7;
+    //weightMatrix[1][2] = 7;
+    //weightMatrix[2][3] = 2;
+    //weightMatrix[3][2] = 2;
+    //weightMatrix[2][4] = 7;
+    //weightMatrix[4][2] = 7;
+    //weightMatrix[1][3] = 5;
+    //weightMatrix[3][1] = 5;
+    //weightMatrix[1][4] = 1;
+    //weightMatrix[4][1] = 1;
     weightMatrix[0][2] = 445;
     weightMatrix[1][2] = 395;
     weightMatrix[1][5] = 606;
@@ -110,30 +102,41 @@ class Graph {
     weightMatrix[6][5] = 1006;
     weightMatrix[6][7] = 221;
     weightMatrix[7][6] = 221;
-    print(weightMatrix[7][6]);
   }
 
-  dijkistra(int start) {
+  dijkistra(int start, int end) {
     distance[start - 1] = 0;
     List<int> pila = [];
+    List<int> result = [];
     pila.add(start - 1);
     while (pila.length != 0) {
       int u = pila[0];
       pila.removeAt(0);
-      visto[u] = true;
       for (int i = 0; i < maxVertices; i++) {
-        if (weightMatrix[u][i] != 0) {
-          if (distance[u] + weightMatrix[u][i] < distance[i]) {
-            if (!visto[i]) {
+        if (weightMatrix[u][i] > 0) {
+          if (!visto[i]) {
+            if (distance[u] + weightMatrix[u][i] < distance[i]) {
               distance[i] = distance[u] + weightMatrix[u][i];
-              padre[i] = u;
               pila.add(i);
-              pila.sort();
             }
           }
         }
       }
+      visto[u] = true;
+      pila.sort();
     }
-    print(padre);
+    int temp = end - 1;
+    result.add(temp + 1);
+    while (temp != (start - 1)) {
+      for (int i = 0; i < maxVertices; i++) {
+        if (weightMatrix[temp][i] > 0) {
+          if (distance[temp] - weightMatrix[temp][i] == distance [i]) {
+            result.add(i + 1);
+            temp = i;
+          }
+        }
+      }
+    }
+    return result;
   }
 }
