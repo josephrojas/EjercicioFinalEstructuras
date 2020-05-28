@@ -1,10 +1,58 @@
+import 'package:final_proyect_data_strucures/model/Graph.dart';
 import 'package:final_proyect_data_strucures/view/fade_out.dart';
 import 'package:flutter/material.dart';
 
 import 'city_description.dart';
 
-class Principal extends StatelessWidget {
+class Principal extends StatefulWidget {
   // This widget is the root of your application.
+  @override
+  _PrincipalState createState() => _PrincipalState();
+}
+
+class _PrincipalState extends State<Principal> {
+
+  int _originCity = 0;
+  int _destCity = 0;
+  List<Cities> _companies = Cities.getCities();
+  List<DropdownMenuItem<Cities>> _dropdownMenuItems;
+  Cities _selectedCompany;
+  Cities _selectedCompany2;
+
+  @override
+  void initState() {
+    _dropdownMenuItems = buildDropdownMenuItems(_companies);
+    _selectedCompany = _dropdownMenuItems[0].value;
+    _selectedCompany2=_dropdownMenuItems[0].value;
+    super.initState();
+  }
+
+  onChangeDropdownItem(Cities selectedCompany) {
+    setState(() {
+      _selectedCompany = selectedCompany;
+      _originCity=selectedCompany.id;
+    });
+  }
+  onChangeDropdownItem2(Cities selectedCompany) {
+    setState(() {
+      _selectedCompany2 = selectedCompany;
+      _destCity=selectedCompany.id;
+    });
+  }
+
+  List<DropdownMenuItem<Cities>> buildDropdownMenuItems(List companies) {
+    List<DropdownMenuItem<Cities>> items = List();
+    for (Cities company in companies) {
+      items.add(
+        DropdownMenuItem(
+          value: company,
+          child: Text(company.name),
+        ),
+      );
+    }
+    return items;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,7 +107,11 @@ class Principal extends StatelessWidget {
                         color: Colors.black,
                       ),
                     ),
-                    child: DropDownStates(),
+                    child: DropdownButton(
+                      value: _selectedCompany,
+                      items: _dropdownMenuItems,
+                      onChanged:onChangeDropdownItem
+                    ),
                   ),
                   SizedBox(
                     height: 20,
@@ -93,7 +145,12 @@ class Principal extends StatelessWidget {
                           color: Colors.black,
                         ),
                       ),
-                      child: DropDownStates(),),
+                      child: DropdownButton(
+                        value: _selectedCompany2,
+                        items: _dropdownMenuItems,
+                        onChanged: onChangeDropdownItem2
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -106,11 +163,19 @@ class Principal extends StatelessWidget {
                   FlatButton(
                     padding: EdgeInsets.all(0),
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => CityDescription()),
-                      );
+                      setState(() {
+                        Graph graph = new Graph();
+                        List<int> citiesId =
+                        graph.dijkistra(_originCity, _destCity);
+                        print(citiesId.toString());
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CityDescription(
+                                cityId: citiesId,
+                              )),
+                        );
+                      });
                     },
                     child: Icon(Icons.chevron_right, size: 100.0),
                   ),
@@ -139,52 +204,6 @@ class Cities {
       Cities(5, "Barcelona"),
       Cities(6, "Malaga"),
       Cities(7, "Melilla"),
-      
     ];
-  }
-}
-
-class DropDownStates extends StatefulWidget {
-  @override
-  _DropDownStatesState createState() => _DropDownStatesState();
-}
-
-class _DropDownStatesState extends State<DropDownStates> {
-  List<Cities> _companies = Cities.getCities();
-  List<DropdownMenuItem<Cities>> _dropdownMenuItems;
-  Cities _selectedCompany;
-  @override
-  void initState() {
-    _dropdownMenuItems = buildDropdownMenuItems(_companies);
-    _selectedCompany = _dropdownMenuItems[0].value;
-    super.initState();
-  }
-
-  List<DropdownMenuItem<Cities>> buildDropdownMenuItems(List companies) {
-    List<DropdownMenuItem<Cities>> items = List();
-    for (Cities company in companies) {
-      items.add(
-        DropdownMenuItem(
-          value: company,
-          child: Text(company.name),
-        ),
-      );
-    }
-    return items;
-  }
-
-  onChangeDropdownItem(Cities selectedCompany) {
-    setState(() {
-      _selectedCompany = selectedCompany;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return DropdownButton(
-      value: _selectedCompany,
-      items: _dropdownMenuItems,
-      onChanged: onChangeDropdownItem,
-    );
   }
 }
