@@ -1,22 +1,22 @@
-
 class Graph {
   var maxVertices;
   List<List<int>> matrix;
 
- dijkistra(int start) {
-   List<List<int>> distance;
-   List<List<int>> padre;
-   List<List<int>> visto;
+  dijkistra(int start) {
+    List<int> distance;
+    List<int> padre;
+    List<bool> visto;
     for (int i = 0; i < maxVertices; i++) {
       distance[i] = 1200000000;
       padre[i] = -1;
       visto[i] = false;
     }
-    distance[start]=0;
-    PriorityQueue([int comparison()])=HeapPriorityQueue <E>;
+    distance[start] = 0;
+    List<int> pila;
     pila.add(distance[start]);
-    while (!pila.isEmpty()) {
-      int u = pila.poll();
+    while (pila.length != 0) {
+      int u = pila[0];
+      pila.remove(0);
       visto[u] = true;
       for (int i = 0; i < maxVertices; i++) {
         if (matrix[u][i] != 0) {
@@ -24,6 +24,7 @@ class Graph {
             distance[i] = distance[u] + matrix[u][i];
             padre[i] = u;
             pila.add(i);
+            pila.sort();
           }
         }
       }
