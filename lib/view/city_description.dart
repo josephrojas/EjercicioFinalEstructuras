@@ -18,11 +18,14 @@ class _CityDescriptionState extends State<CityDescription>
   String _cityDescription;
   String _pathImage;
   String _cityValue;
+  var cities = new List();
 
   @override
   void initState() {
     rotationController = AnimationController(
         duration: const Duration(milliseconds: 1000), vsync: this);
+    cities.add("Madrid");
+    cities.add("Barcelona");
     super.initState();
   }
 
@@ -214,6 +217,7 @@ class _CityDescriptionState extends State<CityDescription>
                   Future.delayed(const Duration(milliseconds: 500), () {
                     setState(() {
                       _actualPosition++;
+                      getValue(cities);
                     });
                   });
                 },
