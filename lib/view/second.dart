@@ -1,3 +1,4 @@
+import 'package:final_proyect_data_strucures/view/fade_out.dart';
 import 'package:flutter/material.dart';
 
 import 'city_description.dart';
@@ -13,14 +14,17 @@ class Principal extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  FlatButton(
-                    padding: EdgeInsets.all(0),
-                    onPressed: () {
+                  InkWell(
+                    onTap: () {
                       Navigator.pop(context);
                     },
-                    child: Icon(Icons.chevron_left, size: 100.0),
+                    child: Image(
+                      image: AssetImage("assets/img/volver.png"),
+                      width: 40,
+                      height: 40,
+                    ),
                   ),
                   Center(
                     child: Column(
@@ -32,7 +36,10 @@ class Principal extends StatelessWidget {
                         ),
                         Text(
                           "¿Para dónde vamos?",
-                          style: TextStyle(fontSize: 20),
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w300,
+                          ),
                         )
                       ],
                     ),
@@ -45,26 +52,64 @@ class Principal extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  DropDownStates(),
-                  Image(
-                    image: NetworkImage(
-                        'https://www.gettyimages.es/gi-resources/images/500px/983794168.jpg'),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      border: Border.all(
+                        color: Colors.black,
+                      ),
+                    ),
+                    child: DropDownStates(),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  FadeOut(
+                    3,
+                    Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(
+                                'https://www.gettyimages.es/gi-resources/images/500px/983794168.jpg')),
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        border: Border.all(
+                          color: Colors.black,
+                        ),
+                      ),
+                      width: 363,
+                      height: 226,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 120.0),
-                    child: DropDownStates(),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        border: Border.all(
+                          color: Colors.black,
+                        ),
+                      ),
+                      child: DropDownStates(),),
                   ),
                 ],
+              ),
+              SizedBox(
+                height: 20,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   FlatButton(
                     padding: EdgeInsets.all(0),
-                   onPressed: () {
+                    onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => CityDescription()),
+                        MaterialPageRoute(
+                            builder: (context) => CityDescription()),
                       );
                     },
                     child: Icon(Icons.chevron_right, size: 100.0),

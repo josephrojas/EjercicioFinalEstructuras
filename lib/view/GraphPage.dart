@@ -1,81 +1,100 @@
+import 'package:final_proyect_data_strucures/view/fade_out.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class GraphPage extends StatelessWidget {
+class GraphPage extends StatefulWidget {
+  @override
+  _GraphPageState createState() => _GraphPageState();
+}
+
+class _GraphPageState extends State<GraphPage> with TickerProviderStateMixin {
+
+
+  AnimationController rotationController;
+
+  @override
+  void initState() {
+    rotationController = AnimationController(
+        duration: const Duration(milliseconds: 1000), vsync: this);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    rotationController.dispose();
+    super.dispose();
+  }
+
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      color: Colors.white,
-      child: Column(
-        children: <Widget>[
-          SizedBox(
-            height: 20,
-          ),
-          Row(
-            children: [
-              Container(
-                child: Image(
-                  image: AssetImage("assets/img/volver.png"),
-                  width: 69,
-                  height: 69  ,
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Container(
+          alignment: Alignment.center,
+          color: Colors.white,
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: 20,
+              ),
+              FadeOut(
+                3,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      child: InkWell(
+                        onTap: () => Navigator.pop(context),
+                        child: Image(
+                          image: AssetImage("assets/img/volver.png"),
+                          width: 40,
+                          height: 40,
+                        ),
+                      ),
+                    ),
+                    Column(
+                      children: [
+                        Container(
+                          child: Image(
+                            image: AssetImage("assets/img/logo.png"),
+                            width: 183,
+                            height: 145,
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
                 ),
               ),
-              SizedBox(
-                width: 20,
+              FadeOut(
+                3.5,Text(
+                  "El camino más corto a tu ruta\n es el siguiente",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.black,
+                      decoration: TextDecoration.none),
+                ),
               ),
-              Column(
-                children: [
-                  Container(
-                    child: Image(
-                      image: AssetImage("assets/img/logo.png"),
-                      width: 183,
-                      height: 145,
+              FadeOut(
+                4.5,
+                Container(
+                  height: 500,
+                  alignment: Alignment.centerLeft,
+                  child: Transform.rotate(
+                    angle: 200,
+                    child: CustomPaint(
+                      size: Size(70, 100),
+                      painter: Node(),
                     ),
                   ),
-                  Text(
-                    "El camino más corto a tu ruta",
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.black,
-                      decoration: TextDecoration.none
-                    ),
-                  )
-                ],
-              )
-            ],
-          ),
-          Row(
-            children: <Widget>[
-              Container(
-                padding: new EdgeInsets.only(top: 20.0),
-                margin: EdgeInsets.all(15.0),
-                width: MediaQuery.of(context).size.width / 2 - 48,
-                height: 500,
-                child: CustomPaint(
-                  size: Size(70, 100),
-                  painter: Node(),
-                ),
-              ),
-              Container(
-                padding: new EdgeInsets.only(
-                    top: 10.0, bottom: 10.0, left: 5.0, right: 5.0),
-                width: MediaQuery.of(context).size.width / 2,
-                height: 500,
-                margin: EdgeInsets.only(right: 5),
-                alignment: Alignment.topRight,
-                child: Text(
-                  "El camino mas corto entre ciudad a y ciudad b es este",
-                  style: TextStyle(
-                      color: Colors.black,
-                      decoration: TextDecoration.none,
-                      fontSize: 30.0),
-                  textAlign: TextAlign.center,
                 ),
               ),
             ],
           ),
-        ],
+        ),
       ),
     );
   }

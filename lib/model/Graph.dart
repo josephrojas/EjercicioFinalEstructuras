@@ -4,7 +4,7 @@ class Graph {
   List<List<int>> weightMatrix;
   List<List<int>> cities;
   Graph(){
-
+    
 
   }
   //Lista de convenciones
@@ -61,9 +61,9 @@ class Graph {
       pila.remove(0);
       visto[u] = true;
       for (int i = 0; i < maxVertices; i++) {
-        if (matrix[u][i] != 0) {
-          if (distance[i] > distance[u] + matrix[u][i]) {
-            distance[i] = distance[u] + matrix[u][i];
+        if (adjacentMatrix[u][i] != 0) {
+          if (distance[i] > distance[u] + adjacentMatrix[u][i]) {
+            distance[i] = distance[u] + adjacentMatrix[u][i];
             padre[i] = u;
             pila.add(i);
             pila.sort();
