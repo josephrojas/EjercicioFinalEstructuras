@@ -1,6 +1,10 @@
 class Graph {
   var maxVertices;
   List<List<int>> matrix;
+  Graph(){
+
+
+  }
 
   dijkistra(int start) {
     List<int> distance;
