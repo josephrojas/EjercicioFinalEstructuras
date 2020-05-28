@@ -122,8 +122,8 @@ class _PrincipalState extends State<Principal> {
                       decoration: BoxDecoration(
                         image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: NetworkImage(
-                                'https://estaticos.elperiodico.com/resources/jpg/5/4/9iik4drw-1550597960945.jpg')),
+                            image: AssetImage(
+                                'assets/img/barcelonaFinal.jpg')),
                         borderRadius: BorderRadius.all(Radius.circular(20)),
                         border: Border.all(
                           color: Colors.black,
